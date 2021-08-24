@@ -65,6 +65,7 @@ phase=atan2(immaginaryPart, realPart);
 %axis image
 
 magnitude = abs(inverseFFTForPhase);
+magnitude  = magnitude(:,:,size(magnitude,1)/2);
 figure(4)
 %imagesc(magnitude);
 [Xplot,Yplot]=meshgrid(1:numberOfPoints,1:numberOfPoints);
