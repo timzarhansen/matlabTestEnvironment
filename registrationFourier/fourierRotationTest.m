@@ -19,11 +19,11 @@ for j=1:pointCloud.Count
 end
 % 3D:
 [spectrum1,magnitude1,phase1] = plotffts(voxelData1,1);
-
+%magnitude1 = fftshift(magnitude1);
 %% create voxel grid of pcl and shift by value%%
 voxelData2 = zeros(numberOfPoints,numberOfPoints,numberOfPoints);
 shiftfirst = [0,0,0];
-rotation = rotationMatrix(0,0,1);
+rotation = rotationMatrix(0,0,0.5);
 for j=1:pointCloud.Count
     positionPoint = [pointCloud.Location(j,1)+shiftfirst(1),pointCloud.Location(j,2)+shiftfirst(2),0]';
     positionPoint = rotation*positionPoint;
@@ -36,7 +36,7 @@ end
 % 3D:
 voxelData2=voxelData2 + 0.0*randn(size(voxelData2));
 [spectrum2,magnitude2,phase2] =plotffts(voxelData2,2);
-
+%magnitude2 = fftshift(magnitude2);
 
 %% calculate sampled f(theta,phi)
 
@@ -74,7 +74,7 @@ flm2 = fourieCoeff(fThetaPhi2,numberOfPoints,B,theta,phi);
 
 
 %%
-NTest = 10;
+NTest = 30;
 yawTMP=linspace(0,1.8,NTest);
 COutput = zeros(NTest,1);
 for j = 1:NTest
