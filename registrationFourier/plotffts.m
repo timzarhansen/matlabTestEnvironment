@@ -5,6 +5,7 @@ subplot( 1, 3, 1 )
 imagesc(voxelData(:,:,size(voxelData,1)/2))
 title('Voxel: '+string(figureNumber))
 axis image
+
 %% calculate 3dFFT
 
 

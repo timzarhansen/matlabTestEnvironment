@@ -1,15 +1,26 @@
-function [flm] = fourieCoeff(fThetaPhi,lMax,B,theta,phi)
-    b=1;
-    a=1;
-    flm=zeros(lMax,lMax+1);
-    for j=1:2*B
-        for k=1:2*B
-            for l=1:lMax
-                flm(l,1:(l+1))=flm(l,1:(l+1))+a*fThetaPhi(j,k)*YLMofTP(l,theta(j),phi(k));
+function [flmP,flmM] = fourieCoeff(fThetaPhi,lMax,B,theta,phi)
+    b=B;
+    weights = weightingFunction(B);
+    flmP=zeros(lMax,lMax+1);
+    flmM=zeros(lMax,lMax);
+    for l=1:lMax
+        [YLP ,YLM] = YLMofTP(l,theta,phi);
+        for m=0:l
+            for j=1:2*B
+                for k=1:2*B
+                    if m>0
+                        flmP(l,m+1) = flmP(l,m+1)+weights(j)*fThetaPhi(j,k)*YLP(m+1,j,k);
+    
+                        flmM(l,m) = flmM(l,m)+weights(j)*fThetaPhi(j,k)*YLM(m,j,k);
+                    else
+                        flmP(l,m+1) = flmP(l,m+1)+weights(j)*fThetaPhi(j,k)*YLP(m+1,j,k);
+                    end
+                end
             end
         end 
     end
 
-    flm = sqrt(2*pi)/(2*b)*flm;
+    flmP = sqrt(2*pi)/(2*b)*flmP;
+    flmM = sqrt(2*pi)/(2*b)*flmM;
 end
 
