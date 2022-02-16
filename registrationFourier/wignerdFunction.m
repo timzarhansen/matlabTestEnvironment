@@ -9,7 +9,7 @@ if m2>=m1
 else
     zeta = (-1)^(m2-m1);
 end
-d = zeta*sqrt(factorial(s)*factorial(s+mu+vi)/factorial(s+mu)/factorial(s+vi))*(sin(pitch/2))^(mu)*cos(pitch/2)^vi * jacobiP(s,mu,vi,cos(pitch));
+d = zeta*sqrt(factorial(s)*factorial(s+mu+vi)/factorial(s+mu)/factorial(s+vi))*(sin(pitch/2))^(mu)*(cos(pitch/2))^vi * jacobiP(s,mu,vi,cos(pitch));
 
 
 

@@ -1,6 +1,6 @@
 function [flmP,flmM] = fourieCoeff(fThetaPhi,lMax,B,theta,phi)
     b=B;
-    weights = weightingFunction(B);
+    weights = ones(B*2,1);%weightingFunction(B);
     flmP=zeros(lMax,lMax+1);
     flmM=zeros(lMax,lMax);
     for l=1:lMax

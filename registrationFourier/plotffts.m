@@ -2,7 +2,7 @@ function [fftOutput,magnitude,phase] = plotffts(voxelData,figureNumber)
 figure(figureNumber);
 subplot( 1, 3, 1 )
 
-imagesc(voxelData(:,:,size(voxelData,1)/2))
+imagesc((voxelData(:,:,size(voxelData,1)/2)))
 title('Voxel: '+string(figureNumber))
 axis image
 
@@ -13,6 +13,7 @@ fftOutput = fftshift(fftn(voxelData));
 subplot( 1, 3, 2 )
 magnitude = abs(fftOutput);
 imagesc(magnitude(:,:,size(magnitude,1)/2));
+%imshow(magnitude(:,:,size(magnitude,1)/2));
 title('Magnitude Voxel: '+string(figureNumber))
 axis image
 
