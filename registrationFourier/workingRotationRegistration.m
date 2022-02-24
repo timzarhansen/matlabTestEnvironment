@@ -6,7 +6,7 @@ pointCloud = pcread("after_voxel_second.pcd");
 
 % create voxel grid of pcl %%
 fromTo = 30;
-numberOfPoints=32;
+numberOfPoints=128;
 
 
 shiftfirst = [0,0,0];
@@ -50,31 +50,31 @@ magnitude2=magnitude2/maximumSet2;
 fThetaPhi1 = sampledFThetaPhi(magnitude1,theta,phi,B,rNumbers);
 fThetaPhi2 = sampledFThetaPhi(magnitude2,theta,phi,B,rNumbers);
 
-% if 1
-%     figure(3)
-%     sphere(1000);
-%     ch = get(gca,'children');
-%     set(ch,'facecolor','texturemap','cdata',fThetaPhi1,'edgecolor','none');
-%     axis equal
-%     
-%     
-%     figure(4)
-%     
-%     sphere(1000);
-%     ch = get(gca,'children');
-%     set(ch,'facecolor','texturemap','cdata',fThetaPhi2,'edgecolor','none');
-%     axis equal
-% else
-%     figure(3)
-%     imagesc((fThetaPhi1));
-%     axis image
-%     
-%     
-%     figure(4)
-%     imagesc((fThetaPhi2));
-%     axis image
-% 
-% end
+if 1
+    figure(3)
+    sphere(1000);
+    ch = get(gca,'children');
+    set(ch,'facecolor','texturemap','cdata',fThetaPhi1,'edgecolor','none');
+    axis equal
+    
+    
+    figure(4)
+    
+    sphere(1000);
+    ch = get(gca,'children');
+    set(ch,'facecolor','texturemap','cdata',fThetaPhi2,'edgecolor','none');
+    axis equal
+else
+    figure(3)
+    imagesc((fThetaPhi1));
+    axis image
+    
+    
+    figure(4)
+    imagesc((fThetaPhi2));
+    axis image
+
+end
 
 
 
@@ -109,7 +109,8 @@ writematrix(fThetaPhi2Interleaved',"matrixtwo.csv")
 % axis equal
 
 %%
-N=numberOfPoints;
+
+N=128;
 results = readmatrix("ergWrap.txt");
 
 results = results/max(results);
@@ -148,6 +149,11 @@ figure(3)
 plot(listOfCorrelationAndAngle(:,1),listOfCorrelationAndAngle(:,2),".")
 %
 
+
+
+
+
+
 listOfCorrelationAndAngle=sortrows(listOfCorrelationAndAngle);
 currentaverageAngle = listOfCorrelationAndAngle(1,1);
 numberOfAngles=1;
@@ -169,10 +175,25 @@ for k = 2:length(listOfCorrelationAndAngle)
 end
 resultingPlotting(i,:)=[currentaverageAngle,averageCorrelation/numberOfAngles];
 %
+figure(4)
+clf
 plot(resultingPlotting(:,1),resultingPlotting(:,2),".")
 [pks,potentialRotations] = findpeaks(smooth(resultingPlotting(:,2)),resultingPlotting(:,1));
 %potentialRotations = 2*pi-potentialRotations;
 display(potentialRotations)
+
+hold on
+currentPeakXValue = potentialRotations(1);
+y = resultingPlotting(find(resultingPlotting(:,1)==currentPeakXValue)-5:1:find(resultingPlotting(:,1)==currentPeakXValue)+5,2);
+x = resultingPlotting(find(resultingPlotting(:,1)==currentPeakXValue)-5:1:find(resultingPlotting(:,1)==currentPeakXValue)+5,1);
+
+f = fit(x,y,"gauss1")
+plot(f,x,y)
+
+
+
+
+
 %% show rotations
 
 % for potRotIndex = 1:length(potentialRotations)

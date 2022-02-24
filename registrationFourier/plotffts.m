@@ -10,6 +10,8 @@ axis image
 
 
 fftOutput = fftshift(fftn(voxelData));
+%fftOutput = (fftn(voxelData));
+
 subplot( 1, 3, 2 )
 magnitude = abs(fftOutput);
 imagesc(magnitude(:,:,size(magnitude,1)/2));

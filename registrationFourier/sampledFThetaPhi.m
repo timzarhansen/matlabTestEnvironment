@@ -14,8 +14,8 @@ function [fThetaPhi] = sampledFThetaPhi(magnitude,theta,phi,B,rNumbers)
                 fThetaPhiTMP(j,k)=fThetaPhiTMP(j,k)+magnitude(u,v,w);
             end
         end
-        fThetaPhi=fThetaPhi+adapthisteq(fThetaPhiTMP,'clipLimit',0.8,'Distribution','rayleigh');
-        %fThetaPhi=fThetaPhi+fThetaPhiTMP;
+        %fThetaPhi=fThetaPhi+adapthisteq(fThetaPhiTMP,'clipLimit',0.8,'Distribution','rayleigh');
+        fThetaPhi=fThetaPhi+fThetaPhiTMP;
 
     end
 
