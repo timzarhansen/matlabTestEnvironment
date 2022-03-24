@@ -1,7 +1,7 @@
 clc
 clear
 
-BehaviorDirectory=['/home/tim/DataForTests/StPereDataset'];
+BehaviorDirectory=['/home/tim-linux/dataFolder/StPereDataset'];
 logfilename='_040825_1735_DGPS.log';
 opts = delimitedTextImportOptions;
 opts.Delimiter = {'\t', ' '};

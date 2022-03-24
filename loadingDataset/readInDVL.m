@@ -1,7 +1,7 @@
 clc
 clear
 
-BehaviorDirectory=['/home/tim/DataForTests/StPereDataset'];
+BehaviorDirectory=['datasetGenerated'];
 logfilename='_040825_1735_DVL.log';
 opts = delimitedTextImportOptions;
 opts.Delimiter = {'\t', ' '};
@@ -11,7 +11,7 @@ dvlDataRaw = readmatrix([BehaviorDirectory,'/',logfilename],opts);
 % bottomVelX (cm/s), bottomVelY (cm/s), bottomVelZ (cm/s), bottomVelStatus, rangeBottom1, rangeBottom2, rangeBottom3,
 % amplitude1, amplitude2, amplitude3, percentGoodPings, heading, pitch, roll, temperature, pressure, powerLevel, slosv, elosv, distanceTravelX, distanceTravelY
 
-
+%%
 %dvlDataRaw = readtable([BehaviorDirectory,'/',logfilename],'Delimiter',{'\t', ' '})
 correctIndexedDVLData = dvlDataRaw(5:end,1:end-1);
 correctIndexedDVLData(:,[2,34,35,36,37,38,39]) = [];

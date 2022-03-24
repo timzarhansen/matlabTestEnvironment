@@ -21,7 +21,7 @@ end
 [spectrum1,magnitude1,phase1] = plotffts(voxelData1,1);
 %% create voxel grid of pcl and shift by value%%
 voxelData2 = zeros(numberOfPoints,numberOfPoints,numberOfPoints);
-shiftfirst = [-10,-5];
+shiftfirst = [-5,10];
 for j=1:pointCloud.Count
     xPos=pointCloud.Location(j,1)+shiftfirst(1);
     yPos=pointCloud.Location(j,2)+shiftfirst(2);
@@ -32,7 +32,7 @@ for j=1:pointCloud.Count
 end
 
 % add two copies of this point Cloud
-shiftSecond = [-10,10];
+shiftSecond = [-0,0];
 for j=1:pointCloud.Count
     xPos=pointCloud.Location(j,1)+shiftSecond(1);
     yPos=pointCloud.Location(j,2)+shiftSecond(2);
@@ -42,7 +42,7 @@ for j=1:pointCloud.Count
 end
 
 
-voxelData2=voxelData2 + 0.001*randn(size(voxelData2));
+voxelData2=voxelData2 + 0.000*randn(size(voxelData2));
 [spectrum2,magnitude2,phase2] =plotffts(voxelData2,2);
 
 
@@ -51,8 +51,9 @@ voxelData2=voxelData2 + 0.001*randn(size(voxelData2));
 %% calculate translation
 
 resultingphaseDifference = phase1 - phase2;
+%inverseFFTForPhase = (ifft2(spectrum1.*conj(spectrum2))./abs(spectrum1.*conj(spectrum2)));
 
-inverseFFTForPhase = fftshift(ifft2(exp(i*resultingphaseDifference)));
+inverseFFTForPhase = fftshift(ifft2(exp(-i*resultingphaseDifference)));
 
 immaginaryPart=imag(inverseFFTForPhase);
 realPart = real(inverseFFTForPhase);
