@@ -1,7 +1,7 @@
 function [pcl,binsCleaned] = binsToPCL(bins,xPos,yPos,eraseFirstNentries)
 
 maxValueEnd = 30;
-threshold = 30;
+threshold = 25;
 
 threshholdIfPointIsThere = 45;
 
@@ -23,6 +23,8 @@ binsCleaned(binsCleaned<threshold)=0;
 %         pointsPCL(i,3) = 0;
 %     end
 % end
+
+
 
 
 % pins over threshold saved

@@ -47,10 +47,12 @@ while size(SonarDataRaw,1)-currentStart>200
     axis equal
     view(2)
     figure(2)
-    pcwrite(pcl,"datasetGenerated/pclKeyFrame"+j+"TMP.pcd")
-    system("pdal translate datasetGenerated/pclKeyFrame"+j+"TMP.pcd datasetGenerated/pclKeyFrame"+j+".pcd --writers.pcd.order=""x=Float:4,y=Float:4,z=Float:4""")
-    system("sed -i 's/FIELDS X Y Z/FIELDS x y z/g' datasetGenerated/pclKeyFrame"+j+".pcd")
-    system("rm datasetGenerated/pclKeyFrame"+j+"TMP.pcd")
+    folderName = "differentdatasetGeneration";
+    %folderName = "datasetGenerated";
+    pcwrite(pcl,folderName+"/pclKeyFrame"+j+"TMP.pcd")
+    system("pdal translate "+folderName+"/pclKeyFrame"+j+"TMP.pcd "+folderName+"/pclKeyFrame"+j+".pcd --writers.pcd.order=""x=Float:4,y=Float:4,z=Float:4""")
+    system("sed -i 's/FIELDS X Y Z/FIELDS x y z/g' "+folderName+"/pclKeyFrame"+j+".pcd")
+    system("rm "+folderName+"/pclKeyFrame"+j+"TMP.pcd")
     pcshow(pcl)
     savingKeyframeTimeStamps(j,1:3)=[j,beginningTimeStamp,endTimeStamp];
     j=j+1;

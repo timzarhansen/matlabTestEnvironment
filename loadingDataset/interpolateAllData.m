@@ -5,20 +5,20 @@ clear
 dvlData = readmatrix('datasetGenerated/dvlData.csv');
 numberOfInterpolationPointsDVL = 5;
 
-xVelInterpolated = zeros((size(dvlData,1)-1)*(numberOfInterpolationPointsDVL),1);
-yVelInterpolated = zeros((size(dvlData,1)-1)*(numberOfInterpolationPointsDVL),1);
-zVelInterpolated = zeros((size(dvlData,1)-1)*(numberOfInterpolationPointsDVL),1);
+xVelInterpolated = zeros((size(dvlData,1)-1)*(numberOfInterpolationPointsDVL-1),1);
+yVelInterpolated = zeros((size(dvlData,1)-1)*(numberOfInterpolationPointsDVL-1),1);
+zVelInterpolated = zeros((size(dvlData,1)-1)*(numberOfInterpolationPointsDVL-1),1);
 
-range1Interpolated = zeros((size(dvlData,1)-1)*(numberOfInterpolationPointsDVL),1);
-range2Interpolated = zeros((size(dvlData,1)-1)*(numberOfInterpolationPointsDVL),1);
-range3Interpolated = zeros((size(dvlData,1)-1)*(numberOfInterpolationPointsDVL),1);
+range1Interpolated = zeros((size(dvlData,1)-1)*(numberOfInterpolationPointsDVL-1),1);
+range2Interpolated = zeros((size(dvlData,1)-1)*(numberOfInterpolationPointsDVL-1),1);
+range3Interpolated = zeros((size(dvlData,1)-1)*(numberOfInterpolationPointsDVL-1),1);
 
-rollInterpolated = zeros((size(dvlData,1)-1)*(numberOfInterpolationPointsDVL),1);
-pitchInterpolated = zeros((size(dvlData,1)-1)*(numberOfInterpolationPointsDVL),1);
-yawInterpolated = zeros((size(dvlData,1)-1)*(numberOfInterpolationPointsDVL),1);
+rollInterpolated = zeros((size(dvlData,1)-1)*(numberOfInterpolationPointsDVL-1),1);
+pitchInterpolated = zeros((size(dvlData,1)-1)*(numberOfInterpolationPointsDVL-1),1);
+yawInterpolated = zeros((size(dvlData,1)-1)*(numberOfInterpolationPointsDVL-1),1);
 
-timeInterpolated = zeros((size(dvlData,1)-1)*(numberOfInterpolationPointsDVL),1);
-dvlDataInterpolated = zeros((size(dvlData,1)-1)*(numberOfInterpolationPointsDVL),10);
+timeInterpolated = zeros((size(dvlData,1)-1)*(numberOfInterpolationPointsDVL-1),1);
+dvlDataInterpolated = zeros((size(dvlData,1)-1)*(numberOfInterpolationPointsDVL-1),10);
 indexDVL=1;
 for i = 1:(size(dvlData,1)-1)
     %calculate interpolation of xyz vel and rpy
@@ -39,7 +39,7 @@ for i = 1:(size(dvlData,1)-1)
     
     %integrate xyz vel dependent on rpy
 
-    for j = 1:numberOfInterpolationPointsDVL
+    for j = 2:numberOfInterpolationPointsDVL
         dvlDataInterpolated(indexDVL,10) =rollInterpolatedTMP (j);
         dvlDataInterpolated(indexDVL,9) =pitchInterpolatedTMP (j);
         dvlDataInterpolated(indexDVL,8) =yawInterpolatedTMP  (j);
@@ -69,21 +69,21 @@ numberOfInterpolationPointsIMU = 20;
 imuData = readmatrix('datasetGenerated/IMUData.csv');
 
 
-rollInterpolated = zeros((size(imuData,1)-1)*(numberOfInterpolationPointsIMU),1);
-pitchInterpolated = zeros((size(imuData,1)-1)*(numberOfInterpolationPointsIMU),1);
-yawInterpolated = zeros((size(imuData,1)-1)*(numberOfInterpolationPointsIMU),1);
+rollInterpolated = zeros((size(imuData,1)-1)*(numberOfInterpolationPointsIMU-1),1);
+pitchInterpolated = zeros((size(imuData,1)-1)*(numberOfInterpolationPointsIMU-1),1);
+yawInterpolated = zeros((size(imuData,1)-1)*(numberOfInterpolationPointsIMU-1),1);
 
-rollVelInterpolated = zeros((size(imuData,1)-1)*(numberOfInterpolationPointsIMU),1);
-pitchVelInterpolated = zeros((size(imuData,1)-1)*(numberOfInterpolationPointsIMU),1);
-yawVelInterpolated = zeros((size(imuData,1)-1)*(numberOfInterpolationPointsIMU),1);
+rollVelInterpolated = zeros((size(imuData,1)-1)*(numberOfInterpolationPointsIMU-1),1);
+pitchVelInterpolated = zeros((size(imuData,1)-1)*(numberOfInterpolationPointsIMU-1),1);
+yawVelInterpolated = zeros((size(imuData,1)-1)*(numberOfInterpolationPointsIMU-1),1);
 
-accelXInterpolated = zeros((size(imuData,1)-1)*(numberOfInterpolationPointsIMU),1);
-accelYInterpolated = zeros((size(imuData,1)-1)*(numberOfInterpolationPointsIMU),1);
-accelZInterpolated = zeros((size(imuData,1)-1)*(numberOfInterpolationPointsIMU),1);
+accelXInterpolated = zeros((size(imuData,1)-1)*(numberOfInterpolationPointsIMU-1),1);
+accelYInterpolated = zeros((size(imuData,1)-1)*(numberOfInterpolationPointsIMU-1),1);
+accelZInterpolated = zeros((size(imuData,1)-1)*(numberOfInterpolationPointsIMU-1),1);
 
-timeInterpolated = zeros((size(imuData,1)-1)*(numberOfInterpolationPointsIMU),1);
+timeInterpolated = zeros((size(imuData,1)-1)*(numberOfInterpolationPointsIMU-1),1);
 
-imuDataInterpolated = zeros((size(imuData,1)-1)*(numberOfInterpolationPointsIMU),10);
+imuDataInterpolated = zeros((size(imuData,1)-1)*(numberOfInterpolationPointsIMU-1),10);
 indexIMU=1;
 for i = 1:(size(imuData,1)-1)
     %calculate interpolation of xyz vel and rpy
@@ -103,7 +103,7 @@ for i = 1:(size(imuData,1)-1)
     
 
 
-    for j = 1:numberOfInterpolationPointsIMU
+    for j = 2:numberOfInterpolationPointsIMU
         imuDataInterpolated(indexDVL,10) = rollInterpolatedTMP (j);
         imuDataInterpolated(indexDVL,9) = pitchInterpolatedTMP (j);
         imuDataInterpolated(indexDVL,8) = yawInterpolatedTMP  (j);
@@ -128,4 +128,64 @@ writematrix(imuDataInterpolated,"datasetGenerated/IMUDataInterpolated.csv")
 %axis equal
 
 
+%% 'time', 'latitude', 'longitude','status','altitude','geoide altitude','true course (deg)', 'magnetic course (deg)', 'vel (knots)', 'vel (km/h)'
 
+numberOfInterpolationPointsGT = 5;
+gtData = readmatrix('datasetGenerated/GTData.csv');
+
+
+latitudeInterpolated = zeros((size(gtData,1)-1)*(numberOfInterpolationPointsGT-1),1);
+longitudeInterpolated = zeros((size(gtData,1)-1)*(numberOfInterpolationPointsGT-1),1);
+statusInterpolated = zeros((size(gtData,1)-1)*(numberOfInterpolationPointsGT-1),1);
+
+altitudeInterpolated = zeros((size(gtData,1)-1)*(numberOfInterpolationPointsGT-1),1);
+geoideAltitudeInterpolated = zeros((size(gtData,1)-1)*(numberOfInterpolationPointsGT-1),1);
+trueCourseInterpolated = zeros((size(gtData,1)-1)*(numberOfInterpolationPointsGT-1),1);
+
+magneticCourseInterpolated = zeros((size(gtData,1)-1)*(numberOfInterpolationPointsGT-1),1);
+velKnotsInterpolated = zeros((size(gtData,1)-1)*(numberOfInterpolationPointsGT-1),1);
+velKmhInterpolated = zeros((size(gtData,1)-1)*(numberOfInterpolationPointsGT-1),1);
+
+timeInterpolated = zeros((size(gtData,1)-1)*(numberOfInterpolationPointsGT-1),1);
+
+gtDataInterpolated = zeros((size(gtData,1)-1)*(numberOfInterpolationPointsGT-1),10);
+indexGT=1;
+for i = 1:(size(gtData,1)-1)
+    %calculate interpolation of xyz vel and rpy
+
+
+
+    timeInterpolated = linspace(gtData(i,1),gtData(i+1,1),numberOfInterpolationPointsGT);
+    latitudeInterpolated = linspace(gtData(i,2),gtData(i+1,2),numberOfInterpolationPointsGT);
+    longitudeInterpolated = linspace(gtData(i,3),gtData(i+1,3),numberOfInterpolationPointsGT);
+    statusInterpolated = linspace(gtData(i,4),gtData(i+1,4),numberOfInterpolationPointsGT);
+    altitudeInterpolated = linspace(gtData(i,5),gtData(i+1,5),numberOfInterpolationPointsGT);
+    geoideAltitudeInterpolated = linspace(gtData(i,6),gtData(i+1,6),numberOfInterpolationPointsGT);
+    trueCourseInterpolated = linspace(gtData(i,7),gtData(i+1,7),numberOfInterpolationPointsGT);
+    magneticCourseInterpolated = linspace(gtData(i,8),gtData(i+1,8),numberOfInterpolationPointsGT);
+    velKnotsInterpolated = linspace(gtData(i,9),gtData(i+1,9),numberOfInterpolationPointsGT);
+    velKmhInterpolated = linspace(gtData(i,10),gtData(i+1,10),numberOfInterpolationPointsGT);
+
+    for j = 2:numberOfInterpolationPointsGT
+                
+
+
+        gtDataInterpolated(indexGT,1) = timeInterpolated(j);
+        gtDataInterpolated(indexGT,2) = latitudeInterpolated (j);
+        gtDataInterpolated(indexGT,3) = longitudeInterpolated(j);
+        gtDataInterpolated(indexGT,4) = statusInterpolated(j);
+        gtDataInterpolated(indexGT,5) = altitudeInterpolated(j);
+        gtDataInterpolated(indexGT,6) = geoideAltitudeInterpolated(j);
+        gtDataInterpolated(indexGT,7) = trueCourseInterpolated(j);
+        gtDataInterpolated(indexGT,8) = magneticCourseInterpolated(j);
+        gtDataInterpolated(indexGT,9) = velKnotsInterpolated(j);
+        gtDataInterpolated(indexGT,10) = velKmhInterpolated(j);
+        indexGT = indexGT + 1;
+    end
+
+end
+
+
+writematrix(gtDataInterpolated,"datasetGenerated/GTDataInterpolated.csv")
+%plot(yVel,xVel,".")
+%axis equal
