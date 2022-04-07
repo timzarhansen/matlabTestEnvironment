@@ -7,7 +7,7 @@ for j=1:229
     firstScan=['pclKeyFrame',num2str(whichKeyframe),'.pcd'];
     secondScan =['pclKeyFrame',num2str(whichKeyframe+1),'.pcd'];
 
-    command =['rosrun underwaterslam registrationStPereDataset ',nameOfFolder,firstScan,' ',nameOfFolder,secondScan];
+    command =['rosrun underwaterslam registrationOfTwoPCLs ',nameOfFolder,firstScan,' ',nameOfFolder,secondScan];
     %system(cmdStr);
     system(command);
 

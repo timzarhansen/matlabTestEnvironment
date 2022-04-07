@@ -7,16 +7,18 @@ for j=1:229
     firstScan=['pclKeyFrame',num2str(whichKeyframe),'.pcd'];
     secondScan =['pclKeyFrame',num2str(whichKeyframe+1),'.pcd'];
 
-    command =['rosrun underwaterslam registrationStPereDataset ',nameOfFolder,firstScan,' ',nameOfFolder,secondScan];
+    command =['rosrun underwaterslam registrationOfTwoPCLs ',nameOfFolder,firstScan,' ',nameOfFolder,secondScan];
     %system(cmdStr);
     system(command);
-
-    
+    transformation1 = readmatrix([nameOfFolder , 'position',num2str(whichKeyframe),'.csv']); 
+    transformation2 = readmatrix([nameOfFolder , 'position',num2str(whichKeyframe+1),'.csv']);
+    resultingTranslationDiff = transformation2(1:3)-transformation1(1:3);
+    resultingRotationDiff = transformation2(4:6)-transformation1(4:6);
     %%
     
     
     
-   magnitudeFFTW1 = readmatrix("magnitudeFFTW1.csv");
+    magnitudeFFTW1 = readmatrix("magnitudeFFTW1.csv");
     N=sqrt(size(magnitudeFFTW1,1));
     
     phaseFFTW1 = readmatrix("phaseFFTW1.csv");
@@ -168,4 +170,18 @@ for j=1:229
     
     
     pcshowpair(pointCloudResult1, pointCloudResult2)
+
+
+
+
+
+
+%% calculate difference of Rotation 
+
+    resultingTransformationOfScan = readmatrix("resultingTransformation.csv");
+
+
+
+
+
 end
