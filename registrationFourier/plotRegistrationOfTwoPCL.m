@@ -14,7 +14,7 @@ translationDiffInitialGuess = zeros(size(from:to,2),2);
 
 for indexCurrentFrame = from:to
     whichKeyframe = indexCurrentFrame
-    nameOfCurrentTestingSet = 'gazeboCorrectedUnevenAnglesPCLs_4_100';
+    nameOfCurrentTestingSet = 'gazeboCorrectedEvenAnglesPCLs_2_75';
     %nameOfFolder = '/home/tim-linux/dataFolder/gazeboCorrectedEvenAnglesPCLs/';
     %nameOfFolder = '/home/tim-linux/dataFolder/gazeboCorrectedUnevenAnglesPCLs/';
 
@@ -281,7 +281,7 @@ for indexCurrentFrame = from:to
     resultingYawDiffBestMatching(indexCurrentFrame-from+1) = atan2(sin(rpyTMP(3) - resultingTransformationOfScan(6)), cos(rpyTMP(3) - resultingTransformationOfScan(6)));
     %atan2(sin(rpyTMP(3) - resultingTransformationOfScan(6)), cos(rpyTMP(3) - resultingTransformationOfScan(6)))
     translationDiffBestMatching(indexCurrentFrame-from+1,:) = resultingTransformationOfScan(1:2)-resultingGTTransformation(1:2,4);
-    save([ 'resultsOfManyMatching/' nameOfCurrentTestingSet '.mat'],'resultingYawDiffInitialGuess','translationDiffInitialGuess','resultingYawDiffBestMatching','translationDiffBestMatching')
+    save([ 'resultsOfManyMatching/' nameOfCurrentTestingSet '64.mat'],'resultingYawDiffInitialGuess','translationDiffInitialGuess','resultingYawDiffBestMatching','translationDiffBestMatching')
 end
 
 %%
