@@ -371,8 +371,8 @@ pcshowpair(pointCloudResult1, pointCloudResult2)
 figure(4)
 for i = 5:5
     %i = 40;
-    %pcl = pcread("/home/tim-linux/dataFolder/StPereDataset/pclKeyFrame"+i+".pcd");
-    pcl = pcread("/home/tim-linux/dataFolder/newStPereDatasetCorrectionOnly/pclKeyFrame"+i+".pcd");
+    %pcl = pcread("/home/tim-external/dataFolder/StPereDataset/pclKeyFrame"+i+".pcd");
+    pcl = pcread("/home/tim-external/dataFolder/newStPereDatasetCorrectionOnly/pclKeyFrame"+i+".pcd");
     pcshow(pcl)
     pause(0.3)
 

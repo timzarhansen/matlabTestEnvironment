@@ -5,21 +5,21 @@ clear
 
 %Difficult success number 3
 %whichKeyframe = 11
-%nameOfFolder = '/home/tim-linux/dataFolder/gazeboCorrectedUnevenAnglesPCLs_4_100/';
+%nameOfFolder = '/home/tim-external/dataFolder/gazeboCorrectedUnevenAnglesPCLs_4_100/';
 
 
 % classical success 2
 whichKeyframe =24;%5
-nameOfFolder = '/home/tim-linux/dataFolder/gazeboCorrectedUnevenAnglesPCLs_4_100/';
+nameOfFolder = '/home/tim-external/dataFolder/gazeboCorrectedUnevenAnglesPCLs_4_100/';
 
 % difficult failure
 %whichKeyframe =37;%5
-%nameOfFolder = '/home/tim-linux/dataFolder/gazeboCorrectedUnevenAnglesPCLs_4_100/';
+%nameOfFolder = '/home/tim-external/dataFolder/gazeboCorrectedUnevenAnglesPCLs_4_100/';
 
 %whichKeyframe = 145;%5
-%nameOfFolder = '/home/tim-linux/dataFolder/gazeboCorrectedUnevenAnglesPCLs_4_100/';
-%nameOfFolder = '/home/tim-linux/dataFolder/gazeboCorrectedUnevenAnglesPCLs_4_100/';
-%nameOfFolder = '/home/tim-linux/dataFolder/newStPereDatasetCorrectionOnly/';
+%nameOfFolder = '/home/tim-external/dataFolder/gazeboCorrectedUnevenAnglesPCLs_4_100/';
+%nameOfFolder = '/home/tim-external/dataFolder/gazeboCorrectedUnevenAnglesPCLs_4_100/';
+%nameOfFolder = '/home/tim-external/dataFolder/newStPereDatasetCorrectionOnly/';
 firstScan=['pclKeyFrame',num2str(whichKeyframe),'.pcd'];
 secondScan =['pclKeyFrame',num2str(whichKeyframe+1),'.pcd'];
 

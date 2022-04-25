@@ -15,12 +15,12 @@ translationDiffInitialGuess = zeros(size(from:to,2),2);
 for indexCurrentFrame = from:to
     whichKeyframe = indexCurrentFrame
     nameOfCurrentTestingSet = 'gazeboCorrectedEvenAnglesPCLs_2_75';
-    %nameOfFolder = '/home/tim-linux/dataFolder/gazeboCorrectedEvenAnglesPCLs/';
-    %nameOfFolder = '/home/tim-linux/dataFolder/gazeboCorrectedUnevenAnglesPCLs/';
+    %nameOfFolder = '/home/tim-external/dataFolder/gazeboCorrectedEvenAnglesPCLs/';
+    %nameOfFolder = '/home/tim-external/dataFolder/gazeboCorrectedUnevenAnglesPCLs/';
 
-    %nameOfFolder = '/home/tim-linux/dataFolder/newStPereDatasetCorrectionOnly/';
+    %nameOfFolder = '/home/tim-external/dataFolder/newStPereDatasetCorrectionOnly/';
 
-    nameOfFolder = ['/home/tim-linux/dataFolder/' nameOfCurrentTestingSet '/'];
+    nameOfFolder = ['/home/tim-external/dataFolder/' nameOfCurrentTestingSet '/'];
     firstScan=['pclKeyFrame',num2str(whichKeyframe),'.pcd'];
     secondScan =['pclKeyFrame',num2str(whichKeyframe+1),'.pcd'];
     

@@ -2,8 +2,8 @@ clc
 clear
 for j=1:229
     whichKeyframe =j;
-    %nameOfFolder = '/home/tim-linux/dataFolder/newStPereDatasetCorrectionOnly/';
-    nameOfFolder = '/home/tim-linux/dataFolder/gazeboCorrectedPCLs/';
+    %nameOfFolder = '/home/tim-external/dataFolder/newStPereDatasetCorrectionOnly/';
+    nameOfFolder = '/home/tim-external/dataFolder/gazeboCorrectedPCLs/';
     firstScan=['pclKeyFrame',num2str(whichKeyframe),'.pcd'];
     secondScan =['pclKeyFrame',num2str(whichKeyframe+1),'.pcd'];
 
