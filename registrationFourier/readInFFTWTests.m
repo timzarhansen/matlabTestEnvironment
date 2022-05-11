@@ -116,11 +116,11 @@ if 1
 
 else
     figure(3)
-    imagesc((fThetaPhi1));
-    axis image
-    figure(4)
-    imagesc((resampledDataForSphereResult));
-    axis image
+%     imagesc((fThetaPhi1));
+%     axis image
+%     figure(4)
+%     imagesc((resampledDataForSphereResult));
+%     axis image
     
     
 end
@@ -299,19 +299,23 @@ shiftXY = (xAxisIndex-1)*0.6;
 x = linspace(0,0.6*(N-1),N);
 
 
-figure(5)
-clf
-plot(x,y);
-
-y = [y(howManyRemove+1:end-howManyRemove)];
-x = [x(howManyRemove+1:end-howManyRemove)];
+% figure(5)
+% clf
 
 
-hold on 
 
-gaussEqn = string(M)+'*exp(-((x-'+string(shiftXY)+')/c/2)^2)';
-f = fit(x',y,gaussEqn,'StartPoint', [20])
-plot(f,x,y);
+
+% plot(x,y);
+% 
+% y = [y(howManyRemove+1:end-howManyRemove)];
+% x = [x(howManyRemove+1:end-howManyRemove)];
+% 
+% 
+% hold on 
+% 
+% gaussEqn = string(M)+'*exp(-((x-'+string(shiftXY)+')/c/2)^2)';
+% f = fit(x',y,gaussEqn,'StartPoint', [20])
+% plot(f,x,y);
 
 
 
@@ -352,28 +356,76 @@ plot(f,x,y);
 %% show resulting PCLs
 
 figure(3)
-pointCloudResult1 = pcread("resultingPCL1.pcd");
-pointCloudResult2 = pcread("resultingPCL2.pcd");
-tform = eye(4);
-tform(1:3,1:3)=rotationMatrix(0,0,0);
-tform(1,4)=0;%x value
-tform(2,4)=0;%y value
-tform=affine3d(tform');
-pointCloudResult1 = pctransform(pointCloudResult1,tform);
+
+voxelResult1FFTW = readmatrix("resultVoxel1.csv");
+N=sqrt(size(voxelResult1FFTW,1));
+
+voxelResult2FFTW = readmatrix("resultVoxel2.csv");
+
+
+voxelResult1 =zeros(N,N);
+voxelResult2 =zeros(N,N);
+for j =1:N
+    for k =1:N
+        voxelResult1(j,k) = voxelResult1FFTW(j*N-N+k);
+        voxelResult2(j,k) = voxelResult2FFTW(j*N-N+k);
+
+    end
+end
+
+
+%voxelResult1=fftshift(voxelResult1);
+%voxelResult2=fftshift(voxelResult2);
 
 
 
-pcshowpair(pointCloudResult1, pointCloudResult2)
+
+
+
+subplot( 1, 2, 1 )
+
+imagesc(squeeze(voxelResult1));
+
+
+%imshow(magnitude2(:,:,size(magnitude2,1)/2));
+title('Voxel 1: ')
+axis image
+
+subplot( 1, 2, 2 )
+%imagesc(squeeze(voxelResult2));
+C = imfuse(voxelResult1,voxelResult2,'blend','Scaling','joint');
+imagesc(squeeze(C));
+%imagesc(squeeze(phase(size(phase,1)/2,:,:)));
+title('Voxel 2: ')
+axis image
+
+
+
+
+
+
+% pointCloudResult1 = pcread("resultingPCL1.pcd");
+% pointCloudResult2 = pcread("resultingPCL2.pcd");
+% tform = eye(4);
+% tform(1:3,1:3)=rotationMatrix(0,0,0);
+% tform(1,4)=0;%x value
+% tform(2,4)=0;%y value
+% tform=affine3d(tform');
+% pointCloudResult1 = pctransform(pointCloudResult1,tform);
+% 
+% 
+% 
+% pcshowpair(pointCloudResult1, pointCloudResult2)
 
 
 
 %%
-figure(4)
-for i = 5:5
-    %i = 40;
-    %pcl = pcread("/home/tim-external/dataFolder/StPereDataset/pclKeyFrame"+i+".pcd");
-    pcl = pcread("/home/tim-external/dataFolder/newStPereDatasetCorrectionOnly/pclKeyFrame"+i+".pcd");
-    pcshow(pcl)
-    pause(0.3)
-
-end
+% figure(4)
+% for i = 5:5
+%     %i = 40;
+%     %pcl = pcread("/home/tim-external/dataFolder/StPereDataset/pclKeyFrame"+i+".pcd");
+%     pcl = pcread("/home/tim-external/dataFolder/newStPereDatasetCorrectionOnly/pclKeyFrame"+i+".pcd");
+%     pcshow(pcl)
+%     pause(0.3)
+% 
+% end
