@@ -40,7 +40,7 @@ figure(1)
 
 subplot( 1, 3, 2 )
 
-imagesc(squeeze(magnitude1));
+imagesc(squeeze(hipass_filter(size(magnitude1, 1),size(magnitude1,2)).*magnitude1));
 
 
 %imshow(magnitude2(:,:,size(magnitude2,1)/2));
@@ -65,7 +65,7 @@ figure(2)
 
 subplot( 1, 3, 2 )
 
-imagesc(squeeze(magnitude2));
+imagesc(squeeze(hipass_filter(size(magnitude2, 1),size(magnitude2,2)).*magnitude2));
 
 
 %imshow(magnitude2(:,:,size(magnitude2,1)/2));
@@ -231,8 +231,17 @@ correlationMatrixShift2D = reshape(correlationMatrixShift1D,resultSize,resultSiz
 %correlationMatrixShift2D  = squeeze(correlationMatrixShift3D(65,:,:));
 figure(8)
 %imagesc(magnitude);
+testImage = correlationMatrixShift2D;
+
+% for i=1:50
+%     testImage=imgaussfilt(testImage,'FilterSize',5);
+% end
+
+
+
+
 [Xplot,Yplot]=meshgrid(1:resultSize,1:resultSize);
-surf(Xplot,Yplot,(correlationMatrixShift2D));
+surf(Xplot,Yplot,(testImage));
 xlabel("x-axis");
 ylabel("y-axis");
 
@@ -429,3 +438,5 @@ axis image
 %     pause(0.3)
 % 
 % end
+
+
