@@ -11,7 +11,7 @@ function [flmP,flmM] = fourieCoeff(fThetaPhi,lMax,B,theta,phi)
                     if m>0
                         flmP(l,m+1) = flmP(l,m+1)+weights(j)*fThetaPhi(j,k)*YLP(m+1,j,k);
     
-                        flmM(l,m) = flmM(l,m)+weights(j)*fThetaPhi(j,k)*YLM(m,j,k);
+                        flmM(l,m) = flmM(l,m)+weights(j)*fThetaPhvoxelData2i(j,k)*YLM(m,j,k);
                     else
                         flmP(l,m+1) = flmP(l,m+1)+weights(j)*fThetaPhi(j,k)*YLP(m+1,j,k);
                     end
