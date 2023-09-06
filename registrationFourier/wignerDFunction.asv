@@ -1,7 +1,0 @@
-function [d] = wignerDFunction(pitch,l,m1,m2)
-%WIGNERDFUNCTION Summary of this function goes here
-%   Detailed explanation goes here
-d=0;
-jacobiP(n,a,b,x)
-end
-

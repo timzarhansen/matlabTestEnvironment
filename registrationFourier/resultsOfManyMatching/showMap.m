@@ -28,9 +28,9 @@ nameOfMap = "ValentinourGlobal256map";
 % nameOfFile = "/home/tim-external/Documents/icra2023FMS/figures/simulationMapsDifferentTechniques/"+nameOfMap;
 nameOfFile = "/home/tim-external/Documents/icra2023FMS/figures/bunkerMapsDifferentTechniques/"+nameOfMap;
 
-saveas(gcf,nameOfFile , 'pdf');
-systemCommand = "pdfcrop " + nameOfFile +".pdf "+ nameOfFile+".pdf ";
-system(systemCommand);
+% saveas(gcf,nameOfFile , 'pdf');
+% systemCommand = "pdfcrop " + nameOfFile +".pdf "+ nameOfFile+".pdf ";
+% system(systemCommand);
 
 %%
 % map = readmatrix("/home/tim-external/dataFolder/ValentinBunkerData/randomTests/scanNumber_0/0intensityShifted256.csv");
@@ -39,3 +39,15 @@ system(systemCommand);
 % 
 % figure(5)
 % imagesc(map)
+% figure(12)
+% B=256;
+% index = 1:2*B;
+% thetaList = pi*(2*index+1)/(4*B);
+% 
+% hold on 
+% plot(thetaList)
+% 
+% thetaListTwo = pi*(index-1)/(2*B);
+% plot(thetaListTwo)
+
+

@@ -215,7 +215,7 @@ clf
 
 for i = 1:numberOfSolutions
         subplot(2,2,i)
-    correlationMatrixShift1D = readmatrix(['csvFiles/resultingCorrelationShift' num2str(i-1) '.csv']);
+    correlationMatrixShift1D = readmatrix(['csvFiles/resultingCorrelationShift_' num2str(i-1) '_.csv']);
     resultSize = nthroot(length(correlationMatrixShift1D),2);
     %A = reshape(results,resultSize,resultSize);
     correlationMatrixShift2D = reshape(correlationMatrixShift1D,resultSize,resultSize);

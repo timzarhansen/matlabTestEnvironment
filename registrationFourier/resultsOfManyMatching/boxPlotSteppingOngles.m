@@ -176,7 +176,7 @@ plot(xticksSave,xticksSave,'LineWidth',1.2);
 
 
 
-legend('GICP', 'Super4PCS',  'NDT D2D 2D',  'NDT P2D', 'Our 2D FMS 256', 'Our Global FMS 2D 256','error of Initial Guess','location','northwest', 'Interpreter', 'latex')
+legend('GICP', 'Super4PCS',  'NDT D2D 2D',  'NDT P2D', 'FS2D', 'Global FS2D','error of Initial Guess','location','northwest', 'Interpreter', 'latex')
 ylabel("absolute angle error in degree", 'Interpreter', 'latex')
 xlabel("scan rotated in degree", 'Interpreter', 'latex')
 
@@ -227,7 +227,7 @@ errorbar(xticksSave,mean(errorDistanceOURGlobalFMS256'),std(errorDistanceOURGlob
 
 
 
-legend('GICP', 'Super4PCS',  'NDT D2D 2D',  'NDT P2D', 'Our 2D FMS 256', 'Our Global FMS 2D 256','location','northwest', 'Interpreter', 'latex')
+legend('GICP', 'Super4PCS',  'NDT D2D 2D',  'NDT P2D', 'FS2D', 'Global FS2D','location','northwest', 'Interpreter', 'latex')
 ylabel("absolute distance error in m", 'Interpreter', 'latex')
 xlabel("scan rotated by degree", 'Interpreter', 'latex')
 

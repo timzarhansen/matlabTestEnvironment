@@ -42,8 +42,8 @@ clear
 
 %% test
 
-whichDatasetFolder = "/home/tim-external/dataFolder/2022FinalPaperData/valentinHighNoise52NEW/";
-whichDataset = "valentinHighNoise52NEW";
+whichDatasetFolder = "/home/tim-external/dataFolder/2022FinalPaperData/valentinNoNoise1510NEW/";
+whichDataset = "valentinNoNoise1510NEW";
 
 
 %%

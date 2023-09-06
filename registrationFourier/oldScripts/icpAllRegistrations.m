@@ -76,7 +76,7 @@ for indexCurrentFrame = from:to
     
    
 
-    
+    %%
     
     figure(9)
     clf

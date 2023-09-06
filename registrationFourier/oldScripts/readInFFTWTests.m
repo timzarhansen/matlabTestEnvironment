@@ -11,8 +11,7 @@ voxelDataUsed1 = readmatrix("csvFiles/voxelDataFFTW1.csv");
 magnitudeFFTW2 = readmatrix("csvFiles/magnitudeFFTW2.csv");
 phaseFFTW2 = readmatrix("csvFiles/phaseFFTW2.csv");
 voxelDataUsed2 = readmatrix("csvFiles/voxelDataFFTW2.csv");
-%fftwResult = complex(realFFTW,imaginaryFFTW);
-%fftwResult = (reshape(fftwResult,N,N,N));
+
 magnitude1 =zeros(N,N);
 phase1 =zeros(N,N);
 voxelData1 =zeros(N,N);
@@ -20,25 +19,25 @@ magnitude2 =zeros(N,N);
 phase2 =zeros(N,N);
 voxelData2 =zeros(N,N);
 for j =1:N
-    for k =1:N
-        magnitude1(k,j) = magnitudeFFTW1(k*N-N+j);
-        phase1(k,j) = phaseFFTW1(k*N-N+j);
-        voxelData1(k,j) = voxelDataUsed1((k-1)*N+j);
-        magnitude2(k,j) = magnitudeFFTW2(k*N-N+j);
-        phase2(k,j) = phaseFFTW2(k*N-N+j);
-        voxelData2(k,j) = voxelDataUsed2((k-1)*N+j);
+    for i =1:N
+        magnitude1(i,j) = magnitudeFFTW1((i-1)*N+j);
+        phase1(i,j) = phaseFFTW1((i-1)*N+j);
+        voxelData1(i,j) = voxelDataUsed1((i-1)*N+j);
+        magnitude2(i,j) = magnitudeFFTW2((i-1)*N+j);
+        phase2(i,j) = phaseFFTW2((i-1)*N+j);
+        voxelData2(i,j) = voxelDataUsed2((i-1)*N+j);
     end
 end
 
 
-magnitude1=fftshift(magnitude1);
-phase1=fftshift(phase1);
-magnitude2=fftshift(magnitude2);
-phase2=fftshift(phase2);
+% magnitude1=fftshift(magnitude1);
+% phase1=fftshift(phase1);
+% magnitude2=fftshift(magnitude2);
+% phase2=fftshift(phase2);
 
 figure(1)
 clf
-subplot( 1, 3, 2 )
+subplot( 1, 2, 2 )
 
 % imagesc(squeeze(hipass_filter(size(magnitude1, 1),size(magnitude1,2)).*magnitude1));
 imagesc(squeeze(magnitude1));
@@ -48,14 +47,14 @@ imagesc(squeeze(magnitude1));
 title('Magnitude Voxel: '+string(1))
 axis image
 
-subplot( 1, 3, 3 )
-imagesc(phase1);
-%imagesc(squeeze(phase(size(phase,1)/2,:,:)));
-title('Phase Voxel: '+string(1))
-axis image
+% subplot( 1, 3, 3 )
+% imagesc(phase1);
+% %imagesc(squeeze(phase(size(phase,1)/2,:,:)));
+% title('Phase Voxel: '+string(1))
+% axis image
 
 
-subplot( 1, 3, 1 )
+subplot( 1, 2, 1 )
 
 %N = nthroot(length(voxelDataUsed),3);
 
@@ -64,7 +63,7 @@ axis image
 % figure 2
 figure(2)
 clf
-subplot( 1, 3, 2 )
+subplot( 1, 2, 2 )
 
 % imagesc(squeeze(hipass_filter(size(magnitude2, 1),size(magnitude2,2)).*magnitude2));
 imagesc(squeeze(magnitude2));
@@ -73,31 +72,31 @@ imagesc(squeeze(magnitude2));
 title('Magnitude Voxel: '+string(1))
 axis image
 
-subplot( 1, 3, 3 )
-imagesc(squeeze(phase2));
-%imagesc(squeeze(phase(size(phase,1)/2,:,:)));
-title('Phase Voxel: '+string(1))
-axis image
+% subplot( 1, 3, 3 )
+% imagesc(squeeze(phase2));
+% %imagesc(squeeze(phase(size(phase,1)/2,:,:)));
+% title('Phase Voxel: '+string(1))
+% axis image
 
 
-subplot( 1, 3, 1 )
+subplot( 1, 2, 1 )
 
 %N = nthroot(length(voxelDataUsed),3);
 
 imagesc((voxelData2))
 axis image
 %%
-resampledDataForSphere1 = readmatrix("csvFiles/resampledVoxel1.csv");
-resampledDataForSphere2 = readmatrix("csvFiles/resampledVoxel2.csv");
-
-resampledDataForSphereResult1 =zeros(N,N);
-resampledDataForSphereResult2 =zeros(N,N);
-for j = 1:N
-    for i =1:N
-            resampledDataForSphereResult1(j,i) = resampledDataForSphere1((i-1)*N+j);
-            resampledDataForSphereResult2(j,i) = resampledDataForSphere2((i-1)*N+j);
-    end
-end
+% resampledDataForSphere1 = readmatrix("csvFiles/resampledVoxel1.csv");
+% resampledDataForSphere2 = readmatrix("csvFiles/resampledVoxel2.csv");
+% 
+% resampledDataForSphereResult1 =zeros(N,N);
+% resampledDataForSphereResult2 =zeros(N,N);
+% for j = 1:N
+%     for i =1:N
+%             resampledDataForSphereResult1(j,i) = resampledDataForSphere1((i-1)*N+j);
+%             resampledDataForSphereResult2(j,i) = resampledDataForSphere2((i-1)*N+j);
+%     end
+% end
 
 % currently not that interesting
 % if 1
@@ -129,15 +128,15 @@ end
 
 %% read in result
 % N=256;
-% results = readmatrix("csvFiles/resultCorrelation3D.csv");
-% 
-% results = results/max(results);
-% resultSize = nthroot(length(results),3);
-% 
-% A = reshape(results,resultSize,resultSize,resultSize);
+results = readmatrix("csvFiles/resultCorrelation3D.csv");
+
+results = results/max(results);
+resultSize = nthroot(length(results),3);
+
+A = reshape(results,resultSize,resultSize,resultSize);
 
 %%
-% correlationNumberMatrix = squeeze(A(:,:,1));
+correlationNumberMatrix = squeeze(A(:,:,1));
 % figure(9)
 % imagesc(correlationNumberMatrix)
 
@@ -207,9 +206,12 @@ figure(6)
 clf
 correlationOfAngles = readmatrix("csvFiles/resultingCorrelation1D.csv");
 
-plot(correlationOfAngles)
+xForPlot = 0:size(correlationOfAngles,1)-1;
+xForPlot = xForPlot/size(correlationOfAngles,1)*360;
+plot(xForPlot,correlationOfAngles)
 %%
-
+figure(8)
+clf
 
 correlationMatrixShift1D = readmatrix("csvFiles/resultingCorrelationShift.csv");
 resultSize = nthroot(length(correlationMatrixShift1D),2);
@@ -217,8 +219,8 @@ resultSize = nthroot(length(correlationMatrixShift1D),2);
 correlationMatrixShift2D =zeros(resultSize);
 for j = 1:resultSize
     for i =1:resultSize
-            correlationMatrixShift2D(i,j) = correlationMatrixShift1D((i-1)*N+j);
-            correlationMatrixShift2D(i,j) = correlationMatrixShift1D((i-1)*N+j);
+            correlationMatrixShift2D(i,j) = correlationMatrixShift1D((i-1)*resultSize+j);
+            correlationMatrixShift2D(i,j) = correlationMatrixShift1D((i-1)*resultSize+j);
     end
 end
 
@@ -229,8 +231,7 @@ end
 % [dim1, dim2, dim3] = ind2sub(size(correlationMatrixShift2D),I)
 
 %correlationMatrixShift2D  = squeeze(correlationMatrixShift3D(65,:,:));
-figure(8)
-clf
+
 %imagesc(magnitude);
 testImage = correlationMatrixShift2D;
 
@@ -242,7 +243,7 @@ testImage = correlationMatrixShift2D;
 
 
 [Xplot,Yplot]=meshgrid(1:resultSize,1:resultSize);
-surf(Xplot,Yplot,(testImage));
+surf(Xplot,Yplot,(testImage),'edgecolor', 'none');
 xlabel("x-axis");
 ylabel("y-axis");
 
@@ -365,7 +366,7 @@ x = linspace(0,0.6*(N-1),N);
 
 %% show resulting PCLs
 
-f = figure(3)
+figure(3)
 clf
 voxelResult1FFTW = readmatrix("csvFiles/resultVoxel1.csv");
 N=sqrt(size(voxelResult1FFTW,1));
@@ -426,18 +427,33 @@ axis image
 % 
 % 
 % pcshowpair(pointCloudResult1, pointCloudResult2)
+%% cross corelation
 
-
-
-%%
-% figure(4)
-% for i = 5:5
-%     %i = 40;
-%     %pcl = pcread("/home/tim-external/dataFolder/StPereDataset/pclKeyFrame"+i+".pcd");
-%     pcl = pcread("/home/tim-external/dataFolder/newStPereDatasetCorrectionOnly/pclKeyFrame"+i+".pcd");
-%     pcshow(pcl)
-%     pause(0.3)
+% voxelData1TMP = voxelData1(size(voxelData1,1)/4:3*size(voxelData1,1)/4,size(voxelData1,1)/4:3*size(voxelData1,1)/4);
+% voxelData2TMP = voxelData2(size(voxelData1,1)/4:3*size(voxelData1,1)/4,size(voxelData1,1)/4:3*size(voxelData1,1)/4);
 % 
-% end
+% resultingCrossCorrelation = xcorr2(voxelData1TMP,voxelData2TMP);
+% 
+% [Xplot,Yplot] = meshgrid(1:size(resultingCrossCorrelation,1),1:size(resultingCrossCorrelation,1));
+% surf(Xplot,Yplot,((resultingCrossCorrelation)),'EdgeColor','none');
+% xlabel("x-axis");
+% ylabel("y-axis");
+
+figure(9)
+A_FFT = (fft2(voxelData1));
+imagesc(abs(A_FFT))
+
+B_FFT = (fft2(voxelData2));
+
+
+C_New = fftshift(ifft2(A_FFT.*conj(B_FFT)));
+
+
+[Xplot,Yplot] = meshgrid(1:size(C_New,1),1:size(C_New,1));
+surf(Xplot,Yplot,(C_New),'EdgeColor','none');
+xlabel("x-axis");
+ylabel("y-axis");
+
+
 
 
