@@ -1,0 +1,1 @@
+pdfcrop /home/ws/matlab/registrationFourier/resultsJournalFMS2D/pdfResults/boxplot256computationSpeed.pdf /home/ws/matlab/registrationFourier/resultsJournalFMS2D/pdfResults/boxplot256computationSpeed.pdf &

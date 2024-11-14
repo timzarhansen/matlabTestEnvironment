@@ -1,0 +1,26 @@
+# Windows default autosave extension
+*.asv
+*.csv
+*.txt
+*.ply
+*.pcd
+*.pdf
+# OSX / *nix default autosave extension
+*.m~
+
+# Compiled MEX binaries (all platforms)
+*.mex*
+
+# Packaged app and toolbox files
+*.mlappinstall
+*.mltbx
+
+
+# Simulink autosave extension
+*.autosave
+
+# Simulink cache files
+*.slxc
+
+# Octave session info
+octave-workspace

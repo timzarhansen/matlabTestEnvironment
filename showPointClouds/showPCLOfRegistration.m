@@ -3,7 +3,7 @@ clear
 
 whichScan = 0;
 ourN = 64;
-whichFolder = "/home/tim-external/Documents/matlabTestEnvironment/showPointClouds/final/";
+whichFolder = "/home/ws/matlab/showPointClouds/final/";
 %  0.988821  0.149104         0  -1.72107
 % -0.149104  0.988821        -0  -1.47056
 %        -0         0         1         0

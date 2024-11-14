@@ -2,8 +2,8 @@ clc
 %clear
 
 %THIS FILE WORKS ONLY WITH PLOT ALL SOLUTIONS
-ordnerSave = "/home/tim-external/Documents/matlabTestEnvironment/registrationFourier/resultsJournalFMS2D/pdffigures/";
-
+ordnerSave = "/home/ws/matlab/registrationFourier/resultsJournalFMS2D/pdffigures/";
+nameOfBatchFile = "batchfile.sh";
 
 
 resampledDataForSphere1 = readmatrix("csvFiles/resampledVoxel1.csv");
@@ -48,8 +48,12 @@ set(groot,'defaulttextinterpreter','latex');
 set(groot,'defaultLegendInterpreter','latex');
 
 saveas(gcf,nameOfFile , 'pdf');
-systemCommand = "pdfcrop " + nameOfFile +".pdf "+ nameOfFile+".pdf ";
-system(systemCommand);
+addCommandToBatchfile(nameOfBatchFile,'pdfcrop ' + nameOfFile + '.pdf '+nameOfFile+ '.pdf &',true);
+
+% systemCommand = "pdfcrop " + nameOfFile +".pdf "+ nameOfFile+".pdf ";
+% system(systemCommand);
+
+
 
 %%
 
@@ -62,15 +66,16 @@ xForPlot = xForPlot/size(correlationOfAngles,1)*360;
 plot(xForPlot,correlationOfAngles)
 
 %     axis image    
-f.Position = [100 100 600 250];
-
+% f.Position = [100 100 600 250];
+f.Position = [100 100 400 400];
+grid on
 
 set(groot,'defaultAxesTickLabelInterpreter','latex'); 
 set(groot,'defaulttextinterpreter','latex');
 set(groot,'defaultLegendInterpreter','latex');
 
 ylabel("Correlation Value", 'Interpreter', 'latex')
-xlabel("angle in rad", 'Interpreter', 'latex')
+xlabel("angle in degree", 'Interpreter', 'latex')
 
 
 
@@ -80,8 +85,9 @@ nameOfFile = ordnerSave+nameOfMap;
 
 
 saveas(gcf,nameOfFile , 'pdf');
-systemCommand = "pdfcrop " + nameOfFile +".pdf "+ nameOfFile+".pdf ";
-system(systemCommand);
+addCommandToBatchfile(nameOfBatchFile,'pdfcrop ' + nameOfFile + '.pdf '+nameOfFile+ '.pdf &',true);
+% systemCommand = "pdfcrop " + nameOfFile +".pdf "+ nameOfFile+".pdf ";
+% system(systemCommand);
 %%
 % resultSize = sizeOfSpheres;
 
@@ -101,8 +107,9 @@ set(groot,'defaultAxesTickLabelInterpreter','latex');
 set(groot,'defaulttextinterpreter','latex');
 set(groot,'defaultLegendInterpreter','latex');
 saveas(gcf,nameOfFile , 'pdf');
-systemCommand = "pdfcrop " + nameOfFile +".pdf "+ nameOfFile+".pdf ";
-system(systemCommand);
+addCommandToBatchfile(nameOfBatchFile,'pdfcrop ' + nameOfFile + '.pdf '+nameOfFile+ '.pdf &',true);
+% systemCommand = "pdfcrop " + nameOfFile +".pdf "+ nameOfFile+".pdf ";
+% system(systemCommand);
 
 
 %%
@@ -144,8 +151,10 @@ set(groot,'defaulttextinterpreter','latex');
 set(groot,'defaultLegendInterpreter','latex');
 
 saveas(gcf,nameOfFile , 'pdf');
-systemCommand = "pdfcrop " + nameOfFile +".pdf "+ nameOfFile+".pdf ";
-system(systemCommand);
+addCommandToBatchfile(nameOfBatchFile,'pdfcrop ' + nameOfFile + '.pdf '+nameOfFile+ '.pdf &',true);
+% 
+% systemCommand = "pdfcrop " + nameOfFile +".pdf "+ nameOfFile+".pdf ";
+% system(systemCommand);
 %%
 
 
@@ -164,8 +173,9 @@ set(groot,'defaulttextinterpreter','latex');
 set(groot,'defaultLegendInterpreter','latex');
 
 saveas(gcf,nameOfFile , 'pdf');
-systemCommand = "pdfcrop " + nameOfFile +".pdf "+ nameOfFile+".pdf ";
-system(systemCommand);
+% systemCommand = "pdfcrop " + nameOfFile +".pdf "+ nameOfFile+".pdf ";
+% system(systemCommand);
+addCommandToBatchfile(nameOfBatchFile,'pdfcrop ' + nameOfFile + '.pdf '+nameOfFile+ '.pdf &',true);
 
 
 
@@ -183,9 +193,9 @@ set(groot,'defaulttextinterpreter','latex');
 set(groot,'defaultLegendInterpreter','latex');
 
 saveas(gcf,nameOfFile , 'pdf');
-systemCommand = "pdfcrop " + nameOfFile +".pdf "+ nameOfFile+".pdf ";
-system(systemCommand);
-
+% systemCommand = "pdfcrop " + nameOfFile +".pdf "+ nameOfFile+".pdf ";
+% system(systemCommand);
+addCommandToBatchfile(nameOfBatchFile,'pdfcrop ' + nameOfFile + '.pdf '+nameOfFile+ '.pdf &',true);
 
 
 
@@ -205,9 +215,9 @@ set(groot,'defaulttextinterpreter','latex');
 set(groot,'defaultLegendInterpreter','latex');
 
 saveas(gcf,nameOfFile , 'pdf');
-systemCommand = "pdfcrop " + nameOfFile +".pdf "+ nameOfFile+".pdf ";
-system(systemCommand);
-
+% systemCommand = "pdfcrop " + nameOfFile +".pdf "+ nameOfFile+".pdf ";
+% system(systemCommand);
+addCommandToBatchfile(nameOfBatchFile,'pdfcrop ' + nameOfFile + '.pdf '+nameOfFile+ '.pdf &',true);
 
 % figure 2
 figure(2)
@@ -225,9 +235,9 @@ set(groot,'defaulttextinterpreter','latex');
 set(groot,'defaultLegendInterpreter','latex');
 
 saveas(gcf,nameOfFile , 'pdf');
-systemCommand = "pdfcrop " + nameOfFile +".pdf "+ nameOfFile+".pdf ";
-system(systemCommand);
-
+% systemCommand = "pdfcrop " + nameOfFile +".pdf "+ nameOfFile+".pdf ";
+% system(systemCommand);
+addCommandToBatchfile(nameOfBatchFile,'pdfcrop ' + nameOfFile + '.pdf '+nameOfFile+ '.pdf &',true);
 
 
 
@@ -248,9 +258,9 @@ set(groot,'defaulttextinterpreter','latex');
 set(groot,'defaultLegendInterpreter','latex');
 
 saveas(gcf,nameOfFile , 'pdf');
-systemCommand = "pdfcrop " + nameOfFile +".pdf "+ nameOfFile+".pdf ";
-system(systemCommand);
-
+% systemCommand = "pdfcrop " + nameOfFile +".pdf "+ nameOfFile+".pdf ";
+% system(systemCommand);
+addCommandToBatchfile(nameOfBatchFile,'pdfcrop ' + nameOfFile + '.pdf '+nameOfFile+ '.pdf &',true);
 
 
 figure(15)
@@ -268,8 +278,10 @@ set(groot,'defaulttextinterpreter','latex');
 set(groot,'defaultLegendInterpreter','latex');
 
 saveas(gcf,nameOfFile , 'pdf');
-systemCommand = "pdfcrop " + nameOfFile +".pdf "+ nameOfFile+".pdf ";
-system(systemCommand);
+% systemCommand = "pdfcrop " + nameOfFile +".pdf "+ nameOfFile+".pdf ";
+% system(systemCommand);
+addCommandToBatchfile(nameOfBatchFile,'pdfcrop ' + nameOfFile + '.pdf '+nameOfFile+ '.pdf &',true);
+
 
 figure(16)
 imagesc((resampledDataForSphereResult1));
@@ -283,9 +295,9 @@ set(groot,'defaulttextinterpreter','latex');
 set(groot,'defaultLegendInterpreter','latex');
 
 saveas(gcf,nameOfFile , 'pdf');
-systemCommand = "pdfcrop " + nameOfFile +".pdf "+ nameOfFile+".pdf ";
-system(systemCommand);
-
+% systemCommand = "pdfcrop " + nameOfFile +".pdf "+ nameOfFile+".pdf ";
+% system(systemCommand);
+addCommandToBatchfile(nameOfBatchFile,'pdfcrop ' + nameOfFile + '.pdf '+nameOfFile+ '.pdf &',true);
 
 
 figure(17)
@@ -301,6 +313,6 @@ set(groot,'defaulttextinterpreter','latex');
 set(groot,'defaultLegendInterpreter','latex');
 
 saveas(gcf,nameOfFile , 'pdf');
-systemCommand = "pdfcrop " + nameOfFile +".pdf "+ nameOfFile+".pdf ";
-system(systemCommand);
-
+% systemCommand = "pdfcrop " + nameOfFile +".pdf "+ nameOfFile+".pdf ";
+% system(systemCommand);
+addCommandToBatchfile(nameOfBatchFile,'pdfcrop ' + nameOfFile + '.pdf '+nameOfFile+ '.pdf &',true);

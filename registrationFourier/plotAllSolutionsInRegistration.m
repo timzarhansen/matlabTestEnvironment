@@ -69,7 +69,7 @@ axis image
 
 imwrite(voxelData1/max(max(voxelData1)),'csvFiles/testImages/image1.jpeg','JPEG');
 imwrite(voxelData2/max(max(voxelData2)),'csvFiles/testImages/image2.jpeg','JPEG');
-%%
+%
 
 dataInformation = readmatrix("csvFiles/dataForReadIn.csv");
 
@@ -79,7 +79,7 @@ for i = 1:dataInformation(1)
 end
 cellSize = dataInformation(dataInformation(1)+2);
 
-%%
+%
 figure(3)
 clf
 voxelResult1FFTW = readmatrix("csvFiles/resultVoxel1.csv");
@@ -126,7 +126,7 @@ for j = 1:sizeOfSpheres
 end
 
 % currently not that interesting
-if 0
+if 1
     figure(4)
 
     sphere(1000);
@@ -200,8 +200,8 @@ display("z1: " +string(31/64*360))
 display("y: " + string(39/64*360))
 display("z2: " + string(45/64*360))
 %
-figure(8)
-clf
+% figure(8)
+% clf
 lastNumberOfPoints = 0;
 figure(6)
 clf
@@ -355,7 +355,7 @@ for currentNumberCorrelation = 0:dataInformation(1)-1
         voxelDataTMP2 = voxelData2;
         subplot( 1, 2, 1 )
 
-        imagesc(squeeze(imfuse(voxelDataTMP1,voxelDataTMP2)));
+        imagesc(squeeze(imfuse(voxelDataTMP1,voxelDataTMP2,'blend')));
 %         imagesc(squeeze(voxelDataTMP2));
 
         title('Before Match: ')
@@ -367,11 +367,25 @@ for currentNumberCorrelation = 0:dataInformation(1)-1
         voxelDataTMP2 = imrotate(voxelDataTMP2,angleOfInterest*180/pi,'bilinear','crop');
 
 
-        imagesc(squeeze(imfuse(voxelDataTMP1,voxelDataTMP2)))
+        imagesc(squeeze(imfuse(voxelDataTMP1,voxelDataTMP2,'blend')))
 %         imagesc(squeeze(voxelDataTMP2));
         numberTMP = potentialPeakHeightTMP/(10^1);
         title('Hight of Peak: '+string(numberTMP))
         axis image
+        figure(77)
+        imagesc(squeeze(imfuse(voxelDataTMP1,voxelDataTMP2,'blend')))
+        axis image
+        ordnerSave = "/home/ws/matlab/registrationFourier/resultsJournalFMS2D/pdffigures/";
+        nameOfMap = "blendedScansTogether";
+        nameOfFile = ordnerSave+nameOfMap;
+        
+        set(groot,'defaultAxesTickLabelInterpreter','latex'); 
+        set(groot,'defaulttextinterpreter','latex');
+        set(groot,'defaultLegendInterpreter','latex');
+        
+        saveas(gcf,nameOfFile , 'pdf');
+        addCommandToBatchfile('batchfile.sh','pdfcrop ' + nameOfFile + '.pdf '+nameOfFile+ '.pdf &',true);
+
         pause(0.01)
         %display((transformationTMPSI))
         display(D)

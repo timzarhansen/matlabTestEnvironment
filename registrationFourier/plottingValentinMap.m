@@ -138,7 +138,7 @@ set(groot,'defaultLegendInterpreter','latex');
 % set(gca,'YTickLabel',[]);
 % set(gca,'XTickLabel',[]);
 %pbaspect([1 1 1])
-nameOfPdfFile = '/home/tim-external/Documents/matlabTestEnvironment/registrationFourier/csvFiles/IROSResults/images/' + nameOfDataset;
+nameOfPdfFile = '/home/ws/matlab/registrationFourier/csvFiles/IROSResults/images/' + nameOfDataset;
 saveas(gcf,nameOfPdfFile, 'pdf' )
 
 % system ('gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile=' +nameOfPdfFile +'.pdf '+ nameOfPdfFile +'.pdf');

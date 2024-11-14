@@ -1,4 +1,4 @@
-function [] = plotPdfs(method_Of_interest,voxelSize,initualGuess,ordner,usePoints,sizeOfGrid,numberOfCombinedDatasets)
+function [] = plotPdfs(method_Of_interest,voxelSize,initualGuess,ordner,usePoints,sizeOfGrid,numberOfCombinedDatasets,nameOfBatchFile,ymax,plotNumbers,l2NormMax)
 %     clc
 %     clear
 %     clf
@@ -84,7 +84,7 @@ function [] = plotPdfs(method_Of_interest,voxelSize,initualGuess,ordner,usePoint
     
     y1 = resultListOfInterestWithoutNANs(:,4);
     y2 = resultListOfInterestWithoutNANs(:,5);
-    x1 = [ones(size(resultListOfInterestWithoutNANs(:,7))),resultListOfInterestWithoutNANs(:,7)];
+    x1 = [zeros(size(resultListOfInterestWithoutNANs(:,7))),resultListOfInterestWithoutNANs(:,7)];
     x2 = [zeros(size(resultListOfInterestWithoutNANs(:,7))),initialGuessList(:,4)];
     x3 = [zeros(size(resultListOfInterestWithoutNANs(:,7))),initialGuessList(:,5)];
     b1 = x1\y1
@@ -117,19 +117,28 @@ function [] = plotPdfs(method_Of_interest,voxelSize,initualGuess,ordner,usePoint
         end
     
         axis equal
-        axis xy
-    
+        axis xy    
         set(gca,'ColorScale','log')
     end
-%  
-%  
-    
 
-    title("L2 overlap regression steigung: "+b1(2))
+    ylim([0 l2NormMax])
+
+%  
+%  
     
-    nameOfPdfFile = '/home/tim-external/Documents/matlabTestEnvironment/registrationFourier/resultsJournalFMS2D/pdfResults/l2RegressionOverlap' +string(voxelSize) + string(ordner) + string(initualGuess)+ string(method_Of_interest);
+    pbaspect([2 1 1])
+
+    if plotNumbers
+        title(string(methodOfInterestToString(method_Of_interest))+ " L2 overlap regression: "+b1(2))
+    else
+        title(string(methodOfInterestToString(method_Of_interest))+ " L2 overlap regression")
+    end
+    
+    nameOfPdfFile = '/home/ws/matlab/registrationFourier/resultsJournalFMS2D/pdfResults/l2RegressionOverlap' +string(voxelSize) + string(ordner) + string(initualGuess)+ string(method_Of_interest);
     saveas(gcf,nameOfPdfFile, 'pdf' )
-    system('pdfcrop ' + nameOfPdfFile + '.pdf '+nameOfPdfFile+ '.pdf');
+    addCommandToBatchfile(nameOfBatchFile,'pdfcrop ' + nameOfPdfFile + '.pdf '+nameOfPdfFile+ '.pdf &',true);
+
+    % system('pdfcrop ' + nameOfPdfFile + '.pdf '+nameOfPdfFile+ '.pdf');
     
 
 %     figure(88)
@@ -171,17 +180,22 @@ function [] = plotPdfs(method_Of_interest,voxelSize,initualGuess,ordner,usePoint
 
     end
 
-
+    ylim([0 l2NormMax])
 
    
+    pbaspect([2 1 1])
 
-
-    title("L2 initial guess regression steigung: "+b2(2))
-    
+    if plotNumbers
+        title(string(methodOfInterestToString(method_Of_interest))+ " L2 initial guess regression: "+b2(2))
+    else
+        title(string(methodOfInterestToString(method_Of_interest))+ " L2 initial guess regression")
+    end
     % set(gca, 'YScale', 'log')
-    nameOfPdfFile = '/home/tim-external/Documents/matlabTestEnvironment/registrationFourier/resultsJournalFMS2D/pdfResults/l2RegressionInitialGuess' +string(voxelSize) + string(ordner) + string(initualGuess)+ string(method_Of_interest);
+    nameOfPdfFile = '/home/ws/matlab/registrationFourier/resultsJournalFMS2D/pdfResults/l2RegressionInitialGuess' +string(voxelSize) + string(ordner) + string(initualGuess)+ string(method_Of_interest);
     saveas(gcf,nameOfPdfFile, 'pdf' )
-    system('pdfcrop ' + nameOfPdfFile + '.pdf '+nameOfPdfFile+ '.pdf');
+    addCommandToBatchfile(nameOfBatchFile,'pdfcrop ' + nameOfPdfFile + '.pdf '+nameOfPdfFile+ '.pdf &',true);
+
+    % system('pdfcrop ' + nameOfPdfFile + '.pdf '+nameOfPdfFile+ '.pdf');
     
     
      if(isnan(meanL2Error))
@@ -194,17 +208,38 @@ function [] = plotPdfs(method_Of_interest,voxelSize,initualGuess,ordner,usePoint
 
 
     figure(3)
-    label1 = char(append('L2 error ',string(meanL2Error) , '+-' , string(stdL2Error)));
-    label2 = char(append('angleError ',string(meanAngleError) ,'+-', string(stdAngleError)));
+
+    if plotNumbers
+        label1 = char(append('L2 error ',string(meanL2Error) , '+-' , string(stdL2Error)));
+        label2 = char(append('angleError ',string(meanAngleError) ,'+-', string(stdAngleError)));
+    else
+        label1 = char(append('L2 error '));
+        label2 = char(append('angleError '));
+    end
+
+    % label1 = char(append('L2 error ',string(meanL2Error) , '+-' , string(stdL2Error)));
+    % label2 = char(append('angleError ',string(meanAngleError) ,'+-', string(stdAngleError)));
     label3 = {label1 , label2};
 
 
     boxplot([resultListOfInterestWithoutNANs(:,4),resultListOfInterestWithoutNANs(:,5)],'Labels',label3)
-    title(string(methodOfInterestToString(method_Of_interest))+ " valid: " + string(validPercentage))
+
+
+    pbaspect([2 1 1])
+
+    if plotNumbers
+        title(string(methodOfInterestToString(method_Of_interest))+ " valid: " + string(validPercentage))
+    else
+        title(string(methodOfInterestToString(method_Of_interest)))
+    end
+
+    % title(string(methodOfInterestToString(method_Of_interest))+ " valid: " + string(validPercentage))
     set(gca, 'YScale', 'log')
-    nameOfPdfFile = '/home/tim-external/Documents/matlabTestEnvironment/registrationFourier/resultsJournalFMS2D/pdfResults/boxplot' +string(voxelSize) + string(ordner) + string(initualGuess)+ string(method_Of_interest);
+    nameOfPdfFile = '/home/ws/matlab/registrationFourier/resultsJournalFMS2D/pdfResults/boxplot' +string(voxelSize) + string(ordner) + string(initualGuess)+ string(method_Of_interest);
     saveas(gcf,nameOfPdfFile, 'pdf' )
-    system('pdfcrop ' + nameOfPdfFile + '.pdf '+nameOfPdfFile+ '.pdf');
+    addCommandToBatchfile(nameOfBatchFile,'pdfcrop ' + nameOfPdfFile + '.pdf '+nameOfPdfFile+ '.pdf &',true);
+
+    % system('pdfcrop ' + nameOfPdfFile + '.pdf '+nameOfPdfFile+ '.pdf');
     
     figure(4)
     clf
@@ -236,18 +271,23 @@ function [] = plotPdfs(method_Of_interest,voxelSize,initualGuess,ordner,usePoint
     end
 
 
-
+    ylim([0 ymax])
 
 
 
     title("angle initial guess regression steigung: "+b3(2))
+    if plotNumbers
+        title(string(methodOfInterestToString(method_Of_interest))+ " angle initial guess regression: " + b3(2))
+    else
+        title(string(methodOfInterestToString(method_Of_interest))+ " rotation error")
+    end
     
     
-    
-    %pbaspect([1 1 1])
-    nameOfPdfFile = '/home/tim-external/Documents/matlabTestEnvironment/registrationFourier/resultsJournalFMS2D/pdfResults/regressionAngle' +string(voxelSize) + string(ordner) + string(initualGuess)+ string(method_Of_interest);
+    pbaspect([2 1 1])
+    nameOfPdfFile = '/home/ws/matlab/registrationFourier/resultsJournalFMS2D/pdfResults/regressionAngle' +string(voxelSize) + string(ordner) + string(initualGuess)+ string(method_Of_interest);
     saveas(gcf,nameOfPdfFile, 'pdf' )
-    system('pdfcrop ' + nameOfPdfFile + '.pdf '+nameOfPdfFile+ '.pdf');
+    addCommandToBatchfile(nameOfBatchFile,'pdfcrop ' + nameOfPdfFile + '.pdf '+nameOfPdfFile+ '.pdf &',true);
+    % system('pdfcrop ' + nameOfPdfFile + '.pdf '+nameOfPdfFile+ '.pdf');
 
 
 

@@ -78,7 +78,7 @@ plot(resultListOfInterestWithoutNANs(:,7),resultListOfInterestWithoutNANs(:,4),'
 plot([0,max(resultListOfInterestWithoutNANs(:,7))],[b1(1),b1(1)+max(resultListOfInterestWithoutNANs(:,7))*b1(2)])
 title("L2 overlap regression: "+b1(2))
 
-nameOfPdfFile = '/home/tim-external/Documents/matlabTestEnvironment/registrationFourier/resultsJournalFMS2D/pdfResults/l2RegressionOverlap' + string(initualGuess)+string(voxelSize) + string(ordner) + string(method_Of_interest);
+nameOfPdfFile = '/home/ws/matlab/registrationFourier/resultsJournalFMS2D/pdfResults/l2RegressionOverlap' + string(initualGuess)+string(voxelSize) + string(ordner) + string(method_Of_interest);
 saveas(gcf,nameOfPdfFile, 'pdf' )
 system('pdfcrop ' + nameOfPdfFile + '.pdf '+nameOfPdfFile+ '.pdf');
 
@@ -93,7 +93,7 @@ plot([0,max(initialGuessList(:,4))],[b2(1),b2(1)+max(initialGuessList(:,4))*b2(2
 title("L2 initial guess regression: "+b2(2))
 
 % set(gca, 'YScale', 'log')
-nameOfPdfFile = '/home/tim-external/Documents/matlabTestEnvironment/registrationFourier/resultsJournalFMS2D/pdfResults/l2RegressionInitialGuess' +string(initualGuess)+string(voxelSize) + string(ordner) + string(method_Of_interest);
+nameOfPdfFile = '/home/ws/matlab/registrationFourier/resultsJournalFMS2D/pdfResults/l2RegressionInitialGuess' +string(initualGuess)+string(voxelSize) + string(ordner) + string(method_Of_interest);
 saveas(gcf,nameOfPdfFile, 'pdf' )
 system('pdfcrop ' + nameOfPdfFile + '.pdf '+nameOfPdfFile+ '.pdf');
 
@@ -104,7 +104,7 @@ figure(3)
 boxplot([resultListOfInterestWithoutNANs(:,4),resultListOfInterestWithoutNANs(:,5)],'Labels',{'L2 error','angleError'})
 
 set(gca, 'YScale', 'log')
-nameOfPdfFile = '/home/tim-external/Documents/matlabTestEnvironment/registrationFourier/resultsJournalFMS2D/pdfResults/boxplot' +string(initualGuess)+string(voxelSize) + string(ordner) + string(method_Of_interest);
+nameOfPdfFile = '/home/ws/matlab/registrationFourier/resultsJournalFMS2D/pdfResults/boxplot' +string(initualGuess)+string(voxelSize) + string(ordner) + string(method_Of_interest);
 saveas(gcf,nameOfPdfFile, 'pdf' )
 system('pdfcrop ' + nameOfPdfFile + '.pdf '+nameOfPdfFile+ '.pdf');
 
@@ -119,7 +119,7 @@ title("angle initial guess regression: "+b2(2))
 
 
 %pbaspect([1 1 1])
-nameOfPdfFile = '/home/tim-external/Documents/matlabTestEnvironment/registrationFourier/resultsJournalFMS2D/pdfResults/regressionAngle' +string(initualGuess)+string(voxelSize) + string(ordner) + string(method_Of_interest);
+nameOfPdfFile = '/home/ws/matlab/registrationFourier/resultsJournalFMS2D/pdfResults/regressionAngle' +string(initualGuess)+string(voxelSize) + string(ordner) + string(method_Of_interest);
 saveas(gcf,nameOfPdfFile, 'pdf' )
 system('pdfcrop ' + nameOfPdfFile + '.pdf '+nameOfPdfFile+ '.pdf');
 
